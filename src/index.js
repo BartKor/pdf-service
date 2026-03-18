@@ -26,17 +26,17 @@ app.post('/generate', async (req, res) => {
     try {
         browser = await puppeteer.launch({
             headless: 'new',
-            executablePath: '/usr/bin/google-chrome',
+            // This tells Node to use the variable from Nixpacks OR fall back to null
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/google-chrome', 
             args: [
-                '--no-sandbox', 
+                '--no-sandbox',
                 '--disable-setuid-sandbox',
                 '--disable-dev-shm-usage',
                 '--disable-web-security',
-                '--disable-gpu',           
+                '--disable-gpu',
                 '--no-zygote'
             ]
         });
-
         const page = await browser.newPage();
 
         // SSRF PROTECTION
