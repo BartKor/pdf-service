@@ -26,8 +26,6 @@ app.post('/generate', async (req, res) => {
     try {
         browser = await puppeteer.launch({
             headless: 'new',
-            // This tells Node to use the variable from Nixpacks OR fall back to null
-            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/google-chrome-stable' || '/usr/bin/google-chrome',
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
